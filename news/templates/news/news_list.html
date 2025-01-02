@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>News List</title>
+</head>
+<body>
+    <h1>News List</h1>
+    <form method="get" action="/news/">
+        <label for="search">Search:</label>
+        <input type="text" id="search" name="q" placeholder="Search..." value="{{ request.GET.q }}">
+        <button type="submit">Search</button>
+    </form>
+    <ul>
+        {% for article in articles %}
+            <li>
+                <a href="/news/{{ article.id }}/">{{ article.title }}</a> - {{ article.created }}
+            </li>
+        {% empty %}
+            <li>No news articles available.</li>
+        {% endfor %}
+    </ul>
+    <a href="/news/create/" target="_blank">Create New Article</a>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>News List</title>
+</head>
+<body>
+    <h2>Hyper news</h2>
+    <form method="get" action="/news/">
+        <label for="search">Search:</label>
+        <input type="text" id="search" name="q" placeholder="Search..." value="{{ request.GET.q }}">
+        <button type="submit">Search</button>
+    </form>
+    {% if articles %}
+        {% regroup articles|dictsortreversed:"created" by created_date as date_groups %}
+        {% for date_group in date_groups %}
+            <h4>{{ date_group.grouper }}</h4>
+            <ul>
+                {% for article in date_group.list %}
+                    <li>
+                        <a href="/news/{{ article.link }}/">{{ article.title }}</a> - {{ article.created }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    {% else %}
+        <p>No news articles available.</p>
+    {% endif %}
+    <a href="/news/create/" target="_blank">Create New Article</a>
+</body>
+</html>

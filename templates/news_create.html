@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create News Article</title>
+</head>
+<body>
+    <h1>Create News Article</h1>
+    <form action="/news/create/" method="post">
+        {% csrf_token %}
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" placeholder="Enter the news title" aria-label="Title" required><br>
+
+        <label for="text">Text:</label>
+        <textarea id="text" name="text" placeholder="Enter the news content" aria-label="Text" required></textarea><br>
+
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+    </form>
+    <a href="/news/" target="_blank">Back to News List</a>
+</body>
+</html>
